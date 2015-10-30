@@ -1,7 +1,7 @@
 # Deploy Go server
 ---
 
-- name: "{{ site_repo }}"
+- name: "{{ site_source }}"
   copy: force=yes
     src={{ site_source }}
     dest=/srv/http/{{ site_hostname }}/src/

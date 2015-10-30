@@ -1,5 +1,19 @@
 #!/usr/bin/env ansible-playbook
 ---
+- name: Bootstrap destination
+  hosts:
+    - pyhosts
+    - luahosts
+    - gohosts
+  tasks:
+    - name: Packages!
+      apt: name={{ item }} state=installed update_cache=true
+      with_items:
+        - python-virtualenv
+        - uwsgi-plugin-lua5.1
+  tags:
+    - initial
+
 - name: Deploy python-server
   hosts:
     pyhosts
