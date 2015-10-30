@@ -1,12 +1,6 @@
 # Deploy Python server
 ---
-- name: "Packages"
-  apt:
-    name={{ item }} state=installed
-  with_items:
-    - uwsgi-plugin-python
-
-- name: "{{ site_repo }}"
+- name: "Pull code"
   git:
     repo={{ site_repo }}
     dest=/srv/http/{{ site_hostname }}/src/
