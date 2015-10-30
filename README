@@ -1,0 +1,16 @@
+To recreate the environment I was testing in,
+
+$ git clone https://github.com/troxor/achal 
+$ cd achal
+$ go get github.com/troxor/go-server
+$ ln -s $GOPATH/src/github.com/troxor/go-server .
+
+not really necessary, since deploy.yml pulls from github, but wouldn't hurt
+$ for i in python lua; do git clone https://github.com/troxor/${i}-server ; done
+
+Modify inventory/hosts with the machines to deploy on (I used ubuntu1404vm1, a libvirt VM on my main machine)
+
+Dependencies:
+ - Ansible (most recent versions work, the newest shiny features aren't really used here)
+ - machine to deploy on has ssh key installed, for root user
+
