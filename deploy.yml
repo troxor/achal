@@ -1,0 +1,35 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Deploy python-server
+  hosts:
+    pyhosts
+  roles:
+    - { role: py,
+        site_hostname: "python-server",
+        site_repo: "https://github.com/troxor/python-server",
+      }
+  tags:
+    - python-server
+
+- name: Deploy lua-server
+  hosts:
+    luahosts
+  roles:
+    - { role: lua,
+        site_hostname: "lua-server",
+        site_repo: "https://github.com/troxor/lua-server",
+      }
+  tags:
+    - lua-server
+
+- name: Deploy go-server
+  hosts:
+    gohosts
+  roles:
+    - { role: go,
+        site_hostname: "go-server",
+        site_source: "go-server/go-server"
+      }
+  tags:
+    - go-server
+

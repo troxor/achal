@@ -1,0 +1,28 @@
+# Deploy Python server
+---
+- name: "Packages"
+  apt:
+    name={{ item }} state=installed
+  with_items:
+    - uwsgi-plugin-python
+
+- name: "{{ site_repo }}"
+  git:
+    repo={{ site_repo }}
+    dest=/srv/http/{{ site_hostname }}/src/
+  register: checkout
+
+- name: "{{ site_repo }}: Prep virtualenv"
+  pip:
+    requirements="/srv/http/{{site_hostname}}/src/requirements.txt"
+    virtualenv="/srv/http/{{ site_hostname }}/venv"
+  when:
+    checkout.changed
+
+- name: "Bounce unicorn"
+  command:
+    /srv/http/{{ site_hostname }}/src/graceful.sh
+  when:
+    checkout.changed
+
+  

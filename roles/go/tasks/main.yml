@@ -1,0 +1,16 @@
+# Deploy Go server
+---
+
+- name: "{{ site_repo }}"
+  copy: force=yes
+    src={{ site_source }}
+    dest=/srv/http/{{ site_hostname }}/src/
+    mode=0755
+  register: checkout
+
+- name: "Bounce go-server"
+  command: killall -HUP go-server
+  when:
+    checkout.changed
+
+

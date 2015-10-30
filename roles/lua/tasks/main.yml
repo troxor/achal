@@ -1,0 +1,16 @@
+# Deploy Lua server
+---
+
+- name: "Packages"
+  apt:
+    name={{ item }} state=installed
+  with_items:
+    - lua-wsapi
+    - xavante
+
+- name: "{{ site_repo }}"
+  git: force=yes
+    repo={{ site_repo }}
+    dest=/srv/http/{{ site_hostname }}/src/
+  register: checkout
+
