@@ -1,0 +1,6 @@
+[submodule "python-server"]
+	path = python-server
+	url = https://github.com/troxor/python-server
+[submodule "lua-server"]
+	path = lua-server
+	url = https://github.com/troxor/lua-server
